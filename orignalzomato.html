@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zomato Clone - Discover Restaurants Near You</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .restaurant-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .rating-pill {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .search-container {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://img.freepik.com/premium-photo/dishes-background-set-dishes-dining-table-food-traditional-cuisines-world-top-view-free-space-your-text_187166-36150.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .category-item:hover .category-icon {
+            transform: scale(1.1);
+        }
+        .restaurant-status {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="https://placehold.co/40x40/ef4f5f/white?text=Z" alt="Zomato logo with red background and white Z" class="mr-2">
+                <span class="text-xl font-bold text-red-500">Zomato</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#" class="text-gray-700 hover:text-red-500 transition">Food Delivery</a>
+                <a href="#" class="text-gray-700 hover:text-red-500 transition">Dining Out</a>
+                <a href="#" class="text-gray-700 hover:text-red-500 transition">Nightlife</a>
+                <a href="#" class="text-gray-700 hover:text-red-500 transition">Nutrition</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="text-gray-700 hover:text-red-500 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </button>
+                <button class="bg-red-500 text-white px-4 py-1 rounded-full hover:bg-red-600 transition">Sign In</button>
+                <button class="hidden md:block bg-gray-200 text-gray-700 px-4 py-1 rounded-full hover:bg-gray-300 transition">Create Account</button>
+                <button class="md:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Search Section -->
+    <section class="search-container py-16 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">Find the best restaurants, cafes and bars</h1>
+            <div class="max-w-2xl mx-auto">
+                <div class="relative">
+                    <input type="text" placeholder="Search for restaurants or cuisines..." class="w-full px-6 py-4 rounded-full text-gray-800 focus:outline-none focus:ring-2 focus:ring-red-500">
+                    <button class="absolute right-2 top-2 bg-red-500 text-white px-6 py-2 rounded-full hover:bg-red-600 transition">Search</button>
+                </div>
+                <div class="mt-6 flex flex-wrap justify-center gap-2">
+                    <span class="px-3 py-1 bg-white bg-opacity-20 rounded-full">Popular: </span>
+                    <span class="px-3 py-1 bg-white bg-opacity-20 rounded-full hover:bg-opacity-30 cursor-pointer">Chinese</span>
+                    <span class="px-3 py-1 bg-white bg-opacity-20 rounded-full hover:bg-opacity-30 cursor-pointer">Italian</span>
+                    <span class="px-3 py-1 bg-white bg-opacity-20 rounded-full hover:bg-opacity-30 cursor-pointer">Biryani</span>
+                    <span class="px-3 py-1 bg-white bg-opacity-20 rounded-full hover:bg-opacity-30 cursor-pointer">South Indian</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Categories -->
+    <section class="py-8 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Quick Bites</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-4">
+                <div class="category-item text-center cursor-pointer">
+                    <div class="category-icon w-16 h-16 mx-auto bg-red-50 rounded-full flex items-center justify-center mb-2 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6z" />
+                        </svg>
+                    </div>
+                    <span class="text-sm text-gray-700">Delivery</span>
+                </div>
+                <div class="category-item text-center cursor-pointer">
+                    <div class="category-icon w-16 h-16 mx-auto bg-red-50 rounded-full flex items-center justify-center mb-2 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd" />
+                            <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
+                        </svg>
+                    </div>
+                    <span class="text-sm text-gray-700">Dining Out</span>
+                </div>
+                <div class="category-item text-center cursor-pointer">
+                    <div class="category-icon w-16 h-16 mx-auto bg-red-50 rounded-full flex items-center justify-center mb-2 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <span class="text-sm text-gray-700">Nightlife</span>
+                </div>
+                <div class="category-item text-center cursor-pointer">
+                    <div class="category-icon w-16 h-16 mx-auto bg-red-50 rounded-full flex items-center justify-center mb-2 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" />
+                        </svg>
+                    </div>
+                    <span class="text-sm text-gray-700">Nutrition</span>
+                </div>
+                <div class="category-item text-center cursor-pointer">
+                    <div class="category-icon w-16 h-16 mx-auto bg-red-50 rounded-full flex items-center justify-center mb-2 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <span class="text-sm text-gray-700">Trending</span>
+                </div>
+                <div class="category-item text-center cursor-pointer">
+                    <div class="category-icon w-16 h-16 mx-auto bg-red-50 rounded-full flex items-center justify-center mb-2 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <span class="text-sm text-gray-700">Favorites</span>
+                </div>
+                <div class="category-item text-center cursor-pointer">
+                    <div class="category-icon w-16 h-16 mx-auto bg-red-50 rounded-full flex items-center justify-center mb-2 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <span class="text-sm text-gray-700">Help</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collection Section -->
+    <section class="py-8 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Collections</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="relative rounded-lg overflow-hidden">
+                    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/de/88/0f/caption.jpg?w=500&h=-1&s=1" alt="Trending Places" class="w-full h-48 object-cover">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                        <h3 class="text-white font-semibold">Trending Places</h3>
+                        <p class="text-gray-300 text-sm">30 Places</p>
+                    </div>
+                </div>
+                <div class="relative rounded-lg overflow-hidden">
+                    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/ac/0c/1b/aasmana.jpg?w=500&h=-1&s=1" alt="Luxury Dining" class="w-full h-48 object-cover">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                        <h3 class="text-white font-semibold">Luxury Dining</h3>
+                        <p class="text-gray-300 text-sm">12 Places</p>
+                    </div>
+                </div>
+                <div class="relative rounded-lg overflow-hidden">
+                    <img src="https://b.zmtcdn.com/data/pictures/chains/5/21079905/7a8870385640db8bd2bbdcbea1c17828.jpg?fit=around|750:500&crop=750:500;*,*" alt="Budget Bites" class="w-full h-48 object-cover">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                        <h3 class="text-white font-semibold">Budget Bites</h3>
+                        <p class="text-gray-300 text-sm">45 Places</p>
+                    </div>
+                </div>
+                <div class="relative rounded-lg overflow-hidden">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyJRSCRybH0Uq6Vo8gLAF6t5ZNflY-hcIyMA&s" alt="Cafés & Bakeries" class="w-full h-48 object-cover">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                        <h3 class="text-white font-semibold">Cafés & Bakeries</h3>
+                        <p class="text-gray-300 text-sm">28 Places</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Local Restaurants -->
+    <section class="py-8 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-800">Restaurants Near You</h2>
+                <div class="flex items-center space-x-2">
+                    <span class="text-gray-600">Sort by:</span>
+                    <select class="border rounded-full px-3 py-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500">
+                        <option>Relevance</option>
+                        <option>Delivery Time</option>
+                        <option>Rating</option>
+                        <option>Cost: Low to High</option>
+                        <option>Cost: High to Low</option>
+                    </select>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Restaurant Card 1 -->
+                <div class="restaurant-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300 relative">
+                    <div class="restaurant-status bg-green-500 text-white text-xs px-2 py-1 rounded-full">
+                        Open Now
+                    </div>
+                    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/24/3b/b3/5e/ambiance.jpg?w=900&h=500&s=1" alt="Italian Bistro restaurant" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-bold text-lg text-gray-800">Italian Bistro</h3>
+                            <div class="rating-pill bg-green-600 text-white text-xs px-2 py-1 rounded">
+                                <span>4.5</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="flex items-center text-gray-600 text-sm mb-2">
+                            <span>Italian, Pizza, Pasta</span>
+                        </div>
+                        <div class="flex items-center text-gray-600 text-sm mb-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            <span>1.2 miles away</span>
+                        </div>
+                        <div class="flex items-center text-gray-600 text-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span>25-35 min • $30 for two</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Restaurant Card 2 -->
+                <div class="restaurant-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300 relative">
+                    <div class="restaurant-status bg-blue-500 text-white text-xs px-2 py-1 rounded-full">
+                        Preorder Only
+                    </div>
+                    <img src="https://curlytales.com/wp-content/uploads/2023/11/Harajuku-1.jpgdishes" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-bold text-lg text-gray-800">Tokyo Sushi</h3>
+                            <div class="rating-pill bg-green-600 text-white text-xs px-2 py-1 rounded">
+                                <span>4.7</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="flex items-center text-gray-600 text-sm mb-2">
+                            <span>Japanese, Sushi, Asian</span>
+                        </div>
+                        <div class="flex items-center text-gray-600 text-sm mb-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            <span>0.8 miles away</span>
+                        </div>
+                        <div class="flex items-center text-gray-600 text-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span>40-50 min • $50 for two</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Restaurant Card 3 -->
+                <div class="restaurant-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300 relative">
+                    <div class="restaurant-status bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+                        Closed
+                    </div>
+                    <img src="https://www.plattershare.com/storage/2015/07/8-Spices-of-India-That-Rule-The-Indian-Kitchen.jpg" alt="Spice of India restaurant" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-bold text-lg text-gray-800">Spice of India</h3>
+                            <div class="rating-pill bg-green-600 text-white text-xs px-2 py-1 rounded">
+                                <span>4.3</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="flex items-center text-gray-600 text-sm mb-2">
+                            <span>Indian, North Indian, Mughlai</span>
+                        </div>
+                        <div class="flex items-center text-gray-600 text-sm mb-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            <span>2.1 miles away</span>
+                        </div>
+                        <div class="flex items-center text-gray-600 text-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span>Closed • Opens at 11:00 AM</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Restaurant Card 4 -->
+                <div class="restaurant-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300 relative">
+                    <div class="restaurant-status bg-green-500 text-white text-xs px-2 py-1 rounded-full">
+                        Open Now
+                    </div>
+                    <img src="https://i.ytimg.com/vi/yoJbmn7TeKA/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDLTDhJbNs7zTIEVn-Ij_Jh3PLXZ">
+                    <div class="p-4">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-bold text-lg text-gray-800">Burger Barn</h3>
+                            <div class="rating-pill bg-green-600 text-white text-xs px-2 py-1 rounded">
+                                <span>4.2</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="flex items-center text-gray-600 text-sm mb-2">
+                            <span>American, Fast Food, Burgers</span>
+                        </div>
+                        <div class="flex items-center text-gray-600 text-sm mb-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            <span>1.5 miles away</span>
+                        </div>
+                        <div class="flex items-center text-gray-600 text-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span>20-30 min • $25 for two</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <button class="border border-red-500 text-red-500 px-6 py-2 rounded-full hover:bg-red-500 hover:text-white transition">View All Restaurants</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Food Categories -->
+    <section class="py-8 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Top Cuisines Near You</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition cursor-pointer">
+                    <img src="https://i.pinimg.com/236x/37/b6/60/37b660cb40988dda83c8d345f62c83da.jpg" alt="Pizza with toppings and herbs" class="w-16 h-16 mb-2 rounded-full object-cover">
+                    <span class="text-sm font-medium">Pizza</span>
+                </div>
+                <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGJ1cmdlcnxlbnwwfHwwfHx8MA%3D%3D" alt="Juicy burger with toppings and fries" class="w-16 h-16 mb-2 rounded-full object-cover">
+                    <span class="text-sm font-medium">Burgers</span>
+                </div>
+                <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition cursor-pointer">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0nJlmwDv0aXcq_xL7X7KheyuB2CreSlMgZg&s=10-cover" alt="Asian cuisine" class="w-16 h-16 mb-2 rounded-full object-cover">
+                    <span class="text-sm font-medium">Asian</span>
+                </div>
+                <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition cursor-pointer">
+                    <img src="https://www.giallozafferano.com/images/228-22832/spaghetti-with-tomato-sauce_1200x800.jpg" alt="Plate of spaghetti with tomato sauce" class="w-16 h-16 mb-2 rounded-full object-cover">
+                    <span class="text-sm font-medium">Italian</span>
+                </div>
+                <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition cursor-pointer">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNlxClTgWSeEXC_pKBnrfczmFBBhNOXsQ8vQ&s=10-cover" alt="Sushi" class="w-16 h-16 mb-2 rounded-full object-cover">
+                    <span class="text-sm font-medium">Sushi</span>
+                </div>
+                <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition cursor-pointer">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6mn-WDgoBpUuVBPZDj9SGF5oC0k2HJMiKMA&s=10-cover" alt="Mexican cuisine" class="w-16 h-16 mb-2 rounded-full object-cover">
+                    <span class="text-sm font-medium">Mexican</span>
+                </div>
+                <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition cursor-pointer">
+                    <img src="https://blog.swiggy.com/wp-content/uploads/2024/10/Image1_-gulab-jamun-1024x538.png" alt="Desserts" class="w-16 h-16 mb-2 rounded-full object-cover">
+                    <span class="text-sm font-medium">Desserts</span>
+                </div>
+                <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition cursor-pointer">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzQaE3OBgdy_DBrTtt2Z6EMhcTQZhNb48TZw&s=10-cover" alt="Café" class="w-16 h-16 mb-2 rounded-full object-cover">
+                    <span class="text-sm font-medium">Café</span>
+                </div>
+                <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition cursor-pointer">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8z1BB2fxLh2tweXgSXUOqbUxlbI9ZuOZZMA&s=10-cover" alt="Healthy" class="w-16 h-16 mb-2 rounded-full object-cover">
+                    <span class="text-sm font-medium">Healthy</span>
+                </div>
+                <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition cursor-pointer">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0IVLe4o8Nq40JNP4uZ-TwNQzHpPGyCWy_nA&s=10-cover" alt="Chicken" class="w-16 h-16 mb-2 rounded-full object-cover">
+                    <span class="text-sm font-medium">Chicken</span>
+                </div>
+                <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition cursor-pointer">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0w_ScFOzjAgCrSBAyT6Q1ZvJXd5nLisnh0w&s=10-cover" alt="Biryani" class="w-16 h-16 mb-2 rounded-full object-cover">
+                    <span class="text-sm font-medium">Biryani</span>
+                </div>
+                <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1543007630-9710e4a00a20?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bmlnaHQlMjBiYXJ8ZW58MHx8MHx8fDA%3D" alt="Nightlife" class="w-16 h-16 mb-2 rounded-full object-cover">
+                    <span class="text-sm font-medium">Nightlife</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- App Download Section -->
+    <section class="py-12 bg-gradient-to-r from-red-500 to-red-600 text-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <h2 class="text-3xl font-bold mb-4">Get the Zomato App</h2>
+                    <p class="mb-6">Discover restaurants and order food online with the Zomato app. Find deals, track orders, and enjoy food on the go.</p>
+                    <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
+                        <button class="flex items-center justify-center bg-black bg-opacity-30 px-4 py-3 rounded-lg hover:bg-opacity-40 transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                            </svg>
+                            <span>App Store</span>
+                        </button>
+                        <button class="flex items-center justify-center bg-black bg-opacity-30 px-4 py-3 rounded-lg hover:bg-opacity-40 transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2m3 1A6 6 0 113 9v2h12V9z" />
+                            </svg>
+                            <span>Google Play</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="md:w-1/3">
+                    <img src="https://pbs.twimg.com/media/FV3z4ePUsAA7suZ.jpg" alt="Smartphone showing Zomato app interface                     with food ordering options" class="shadow-lg rounded-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">About Zomato</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Who We Are</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Work With Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Investor Relations</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Report Fraud</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">For Restaurants</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Partner With Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Apps For You</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Restaurant Widgets</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Business Enquiries</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Learn More</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Privacy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Security</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Terms</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Sitemap</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Social Links</h3>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
+                            </svg>
+                        </a>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">Contact Us</h3>
+                        <p class="text-gray-400">help@zomato.com</p>
+                        <p class="text-gray-400">+1 234 567 890</p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-gray-400 text-sm">
+                <p>By continuing past this page, you agree to our Terms of Service, Cookie Policy, Privacy Policy and Content Policies. All trademarks are properties of their respective owners.</p>
+                <p class="mt-2">© 2025 Zomato™ Ltd. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple JavaScript for interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Search focus effect
+            const searchInput = document.querySelector('input[type="text"]');
+            if (searchInput) {
+                searchInput.addEventListener('focus', function() {
+                    this.parentElement.style.boxShadow = '0 0 0 3px rgba(239, 79, 95, 0.3)';
+                });
+                
+                searchInput.addEventListener('blur', function() {
+                    this.parentElement.style.boxShadow = 'none';
+                });
+            }
+            
+            // Mobile menu toggle would go here
+            // Currently just a placeholder as we'd need HTML structure for mobile menu
+        });
+    </script>
+</body>
+</html>
